@@ -1,0 +1,17 @@
+{
+    "verbose": true,
+    "execMap": {
+      "js": "cross-env NODE_ENV=development node --inspect -r dotenv/config",
+      "ts": "cross-env NODE_ENV=development node --inspect -r ts-node/register -r dotenv/config"
+    },
+    "watch": [
+      "app/",
+      ".env",
+      "tsconfig.json"
+    ],
+    "exec": "ts-node ./app/app.ts",
+    "env": {
+      "NODE_ENV": "development"
+    },
+    "ext": "js,json,ts"
+  }
