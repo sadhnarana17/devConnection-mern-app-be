@@ -9,8 +9,8 @@ Ensure the following are installed on your system:
 ## Installation Steps
 1. **Clone the Repository**:
     ```bash
-    git clone <repository-url> /var/www/html/devConnection
-    cd /var/www/html/devConnection
+    git clone <repository-url> /<path>/devConnection
+    cd <path>/devConnection
     ```
 
 2. **Install Dependencies**:
