@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start:dev": "npx nodemon ./app/app.ts"
+    "start:dev": "npx nodemon ./app/app.ts",
+    "lint": "eslint 'app/**/*.{ts,js}'"
   },
   "keywords": [
     "nodejs",
@@ -25,11 +26,17 @@
     "express": "^5.1.0",
     "g": "^2.0.1",
     "mongoose": "^8.17.2",
-    "nodemon": "^3.1.10"
+    "nodemon": "^3.1.10",
+    "validator": "^13.15.15"
   },
   "devDependencies": {
     "@types/express": "^5.0.3",
     "@types/node": "^24.3.0",
+    "@typescript-eslint/eslint-plugin": "^8.40.0",
+    "@typescript-eslint/parser": "^8.40.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
     "ts-node": "^10.9.2",
     "typescript": "^5.9.2"
   }
