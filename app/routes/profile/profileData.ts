@@ -1,0 +1,10 @@
+import { Router } from "express";
+
+const profileDataRouter = (router: Router) => {
+    router.get('/profile/data', async (req, res) => {
+        // Logic to fetch user profile data
+        res.status(200).send({ message: 'User profile data' });
+    });
+}
+
+export default profileDataRouter;
