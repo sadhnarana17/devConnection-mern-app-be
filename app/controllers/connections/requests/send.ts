@@ -11,6 +11,8 @@ interface RequestParams extends RequestType {
     user: InstanceType<typeof User>;
 }
 
+const SEND_REQUEST = ["ignored", "interested"];
+
 export const sendRequestRouter = (router: Router) => {
     router.post('/connections/requests/:send/:toUserId', authMiddleware, async (req: RequestParams, res: Response) => {
         try {
@@ -30,12 +32,12 @@ export const sendRequestRouter = (router: Router) => {
             }
 
             // Check if a record with the same fromUserId exists with ignored or accepted status
-            if (existingRequest.status && ["ignored", "accepted"].includes(existingRequest.status)) {
+            if (existingRequest.status && SEND_REQUEST.includes(existingRequest.status)) {
                 return res.status(400).send({ message: "A request with this fromUserId already exists with ignored or accepted status" });
             }
 
             // Validate the send parameter
-            if (!["interested", "ignored"].includes(send)) {
+            if (!SEND_REQUEST.includes(send)) {
                 return res.status(400).send({ message: "Invalid value for :send parameter" });
             }
 
