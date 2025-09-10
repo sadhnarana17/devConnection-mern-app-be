@@ -23,11 +23,10 @@ export const sendRequestRouter = (router: Router) => {
 
             // Validate that a request between fromUserId and toUserId exists
             const existingRequest = await Request.findOne({
-                fromUserId: loggedInUserId,
-                toUserId,
-            });
-            if (!existingRequest) {
-                return res.status(404).send({ message: "No existing request found between the users" });
+                _$or: [{ fromUserId: loggedInUserId, toUserId }, { fromUserId: toUserId, toUserId: loggedInUserId }]}
+            );
+            if (existingRequest) {
+                return res.status(404).send({ message: "Connection request already exist between the users" });
             }
 
             // Check if a record with the same fromUserId exists with ignored or accepted status
