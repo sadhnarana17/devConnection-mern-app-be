@@ -1,5 +1,7 @@
 import mongoose, { Schema, Document, Model } from 'mongoose';
 import validator from 'validator';
+import jwt from 'jsonwebtoken';
+import bcrypt from 'bcrypt';
 
 export interface IUser extends Document {
   firstName: string;
@@ -11,6 +13,8 @@ export interface IUser extends Document {
   photoUrl?: string;
   about?: string;
   skills?: string[];
+  getJWT(): Promise<string>;
+  checkValidPassword(password: string): Promise<boolean>;
 }
 
 const userSchema: Schema<IUser> = new Schema(
@@ -66,7 +70,7 @@ const userSchema: Schema<IUser> = new Schema(
     age: {
       type: Number,
       required: true,
-      min: 18,
+      min: 13,
     },
     photoUrl: {
       type: String,
@@ -88,6 +92,21 @@ const userSchema: Schema<IUser> = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.methods.getJWT = async function() {
+  const user = this;
+  const token = await jwt.sign(
+    { _id: user._id },
+    process.env.JWT_SECRET,
+    { expiresIn: '7d' }
+  );
+  return token;
+};
+
+userSchema.methods.checkValidPassword = async function(password: string) {
+  const user = this;
+  return await bcrypt.compareSync(password, user.password);
+}
 
 const User: Model<IUser> = mongoose.model<IUser>('User', userSchema);
 export default User;
