@@ -1,8 +1,6 @@
 import { Router } from "express";
-import connectionsRouter from "./list/connections";
-import feedsRouter from "./list/feed";
-import reviewRequestsRouter from "./requests/review";
-import sendRequestRouter from "./requests/send";
+import {connectionsRouter, feedsRouter} from "../../controllers/connections/list";
+import { sendRequestRouter, reviewRequestsRouter } from "../../controllers/connections/requests";
 
 const router = Router();
 connectionsRouter(router);

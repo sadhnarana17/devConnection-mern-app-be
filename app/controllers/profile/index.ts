@@ -1,0 +1,1 @@
+export { profileDataRouter } from './profileData';
